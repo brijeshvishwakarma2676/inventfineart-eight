@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Invent Fine Art design tokens
+   Limestone ground, graphite type, cast-bronze accent.
+   Marcellus (inscriptional serif) for display, Albert Sans for UI.
+------------------------------------------------------------------- */
+@theme {
+  --color-limestone: #f1ece3;
+  --color-plaster: #e6ded1;
+  --color-sandstone: #c9bba3;
+  --color-ash: #645b4f;
+  --color-graphite: #262320;
+  --color-basalt: #2b2825;
+  --color-bronze: #82532d;
+  --color-bronze-deep: #6f4626;
+  --color-brass: #b4925c;
+
+  --font-display: "Marcellus", "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Albert Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-sculpt: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-swift: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Page container: one measure for the whole site */
+@utility shell {
+  width: 100%;
+  max-width: 1520px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+/* The arch: a true semicircular head on any portrait box */
+@utility arch {
+  border-radius: 9999px 9999px 0 0;
+}
+
+/* Type scale, roughly a perfect fourth (1.333), fluid between mobile and desktop */
+@utility t-display {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7.2vw, 8.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+@utility t-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.6vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+@utility t-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4vw, 4.1rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+@utility t-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+  line-height: 1.15;
+}
+@utility t-statement {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.9vw, 2.9rem);
+  line-height: 1.22;
+  letter-spacing: -0.005em;
+}
+@utility t-lead {
+  font-size: clamp(1.075rem, 1.25vw, 1.25rem);
+  line-height: 1.6;
+}
+@utility t-label {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-limestone);
+    color: var(--color-graphite);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-weight: 400;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  ::selection {
+    background: var(--color-bronze);
+    color: var(--color-limestone);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 3px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-brass);
+  }
+}
+
+/* Fine mineral grain over the whole page, like a printed plate */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.17 0 0 0 0 0.13 0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Animated underline used for nav and inline links */
+.link-line {
+  position: relative;
+  text-decoration: none;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2em;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s var(--ease-sculpt);
+}
+.link-line:hover::after,
+.link-line:focus-visible::after,
+.link-line[aria-current="page"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Form fields: underline only, like a measured drawing */
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in oklab, var(--color-graphite) 30%, transparent);
+  padding: 0.75rem 0;
+  font-size: 1.0625rem;
+  color: var(--color-graphite);
+  border-radius: 0;
+  transition: border-color 0.3s ease;
+}
+.field::placeholder {
+  color: color-mix(in oklab, var(--color-ash) 75%, transparent);
+}
+.field:focus {
+  outline: none;
+  border-bottom-color: var(--color-bronze);
+  box-shadow: 0 1px 0 0 var(--color-bronze);
+}
+.field[aria-invalid="true"] {
+  border-bottom-color: #9b3b2a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
