@@ -6,6 +6,7 @@ import RevealText from '../RevealText'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import { img } from '../../data/images'
 import { ease } from '../../lib/motion'
+import { useLoaderDone } from '../../lib/loader'
 
 const lerp = (a, b, t) => a + (b - a) * t
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
@@ -20,6 +21,7 @@ const INTRO =
 export default function Hero() {
   const ref = useRef(null)
   const reduce = useReducedMotion()
+  const loaderDone = useLoaderDone()
   const desktop = useMediaQuery('(min-width: 768px)')
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 
@@ -30,9 +32,10 @@ export default function Hero() {
       intro.set(1)
       return
     }
-    const controls = animate(intro, 1, { duration: 1.8, ease, delay: 0.2 })
+    if (!loaderDone) return // the arch rises as the opening loader lifts away
+    const controls = animate(intro, 1, { duration: 1.8, ease, delay: 0.1 })
     return () => controls.stop()
-  }, [reduce, intro])
+  }, [reduce, intro, loaderDone])
 
   // Arch window, in % of the viewport. Radius = half the window width, in vw.
   const win = desktop ? { top: 15, side: [55, 5] } : { top: 46, side: [6, 6] }
@@ -94,7 +97,7 @@ export default function Hero() {
                 <motion.p
                   className="t-lead text-ash"
                   initial={reduce ? false : { opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={loaderDone ? { opacity: 1, y: 0 } : undefined}
                   transition={{ duration: 1, ease, delay: 1.25 }}
                 >
                   {INTRO}
@@ -102,7 +105,7 @@ export default function Hero() {
                 <motion.div
                   className="mt-8 flex flex-wrap gap-3"
                   initial={reduce ? false : { opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={loaderDone ? { opacity: 1, y: 0 } : undefined}
                   transition={{ duration: 1, ease, delay: 1.4 }}
                 >
                   <Button to="/projects">Explore our work</Button>

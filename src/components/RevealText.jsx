@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { ease, viewport } from '../lib/motion'
+import { useLoaderDone } from '../lib/loader'
 
 /**
  * Heading whose words rise out of a mask, once, as it enters view.
@@ -7,11 +8,13 @@ import { ease, viewport } from '../lib/motion'
  */
 export default function RevealText({ text, as = 'h2', className = '', delay = 0, animateOnMount = false }) {
   const reduce = useReducedMotion()
+  const loaderDone = useLoaderDone()
   const Tag = motion[as]
   const lines = Array.isArray(text) ? text : [text]
   let index = 0
 
-  const trigger = animateOnMount ? { animate: 'show' } : { whileInView: 'show', viewport }
+  // On the first load, headings that play on mount wait until the opening loader lifts.
+  const trigger = animateOnMount ? { animate: loaderDone ? 'show' : 'hidden' } : { whileInView: 'show', viewport }
 
   return (
     <Tag className={className} aria-label={lines.join(' ')} initial={reduce ? 'show' : 'hidden'} {...trigger}>

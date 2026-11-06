@@ -6,6 +6,7 @@ import '@fontsource/albert-sans/latin-400.css'
 import '@fontsource/albert-sans/latin-500.css'
 import '@fontsource/albert-sans/latin-600.css'
 import App from './App'
+import { finishLoader } from './lib/loader'
 import './index.css'
 
 // VITE_MEMORY_ROUTER=true builds a single-file preview that does not depend on server routing.
@@ -20,3 +21,5 @@ createRoot(document.getElementById('root')).render(
     </Router>
   </StrictMode>
 )
+
+finishLoader()
