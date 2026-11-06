@@ -25,8 +25,8 @@ const materials = [
     id: 'frp',
     tab: 'FRP',
     name: 'Fibre-reinforced plastic',
-    image: 'fr-loop',
-    alt: 'A large FRP loop installation in a plaza',
+    image: 'ifa-curved-interior',
+    alt: 'A meeting room lined with curved slatted walls under a lit oval ceiling',
     text:
       'Layers of glass fibre and resin laminated by hand over our patterns, producing shells that are seamless, very light and strong enough to span. FRP lets us build forms that would be impossible in stone, and finish them in anything from gloss lacquer to cold-cast bronze.',
     facts: [
@@ -40,8 +40,8 @@ const materials = [
     id: 'hand',
     tab: 'Hand finishing',
     name: 'Surfaces finished by hand',
-    image: 'st-texture',
-    alt: 'Close view of a fluted, hand-finished surface',
+    image: 'ifa-spinning-wheel-rear',
+    alt: 'Hand-finished banded metal tones on a figure at the spinning wheel',
     text:
       'Every piece leaves the mould unfinished. Our finishers sand, patinate, lime-wash and seal each surface by hand, and match colour to samples from your site. This is where a cast object starts to look like it was always meant to be there.',
     facts: [

@@ -45,8 +45,8 @@ export default function StudioIntro() {
             </motion.div>
 
             <div className="mt-16 w-3/4 self-end md:mt-auto md:w-[62%]">
-              <ImageReveal src={img('st-texture')} alt="Fluted GRC surface under raking light" className="aspect-square" delay={0.15} />
-              <p className="t-label mt-3 text-ash">Fluted GRC, sanded and sealed by hand.</p>
+              <ImageReveal src={img('ifa-buddha-head')} alt="A large Buddha head in a burnished bronze finish" className="aspect-square" imgClassName="object-[50%_35%]" delay={0.15} />
+              <p className="t-label mt-3 text-ash">Buddha head, finished by hand.</p>
             </div>
           </div>
         </div>

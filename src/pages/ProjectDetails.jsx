@@ -11,6 +11,7 @@ import NotFound from './NotFound'
 import usePageMeta from '../hooks/usePageMeta'
 import { projectBySlug, projects } from '../data/projects'
 import { img } from '../data/images'
+import { categoryBySlug } from '../data/categories'
 import { ease, fadeUp, viewport } from '../lib/motion'
 
 const shapes = {
@@ -45,7 +46,9 @@ export default function ProjectDetails() {
     ['Year', project.year],
     ['Scale', project.scale],
     ['Discipline', project.discipline],
-  ]
+    ['Services', project.categories.map((c) => categoryBySlug[c]?.name).filter(Boolean).join(', ')],
+    ['Photographs', project.gallery.length + 1],
+  ].filter(([, v]) => v)
 
   return (
     <PageTransition>
@@ -73,7 +76,7 @@ export default function ProjectDetails() {
 
       {/* Facts */}
       <section className="border-b border-graphite/10">
-        <dl className="shell grid grid-cols-2 gap-y-6 py-10 md:grid-cols-5 md:py-12">
+        <dl className="shell grid grid-cols-2 gap-y-6 py-10 md:flex md:gap-x-20 md:py-12">
           {meta.map(([k, v]) => (
             <div key={k} className="pr-4">
               <dt className="t-label text-ash">{k}</dt>
@@ -108,7 +111,8 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      {/* Concept and materials */}
+      {/* Concept and materials, when the project has them */}
+      {(project.concept || project.materials?.length > 0) && (
       <section className="on-dark bg-basalt py-24 text-limestone md:py-36">
         <div className="shell grid gap-16 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-7">
@@ -120,7 +124,7 @@ export default function ProjectDetails() {
           <div className="md:col-span-4 md:col-start-9">
             <h2 className="t-label text-brass">Materials used</h2>
             <ul className="mt-6">
-              {project.materials.map((m) => (
+              {project.materials?.map((m) => (
                 <li key={m.name} className="border-t border-brass/30 py-5">
                   <span className="font-display text-[1.3rem]">{m.name}</span>
                   <span className="mt-1 block text-[0.95rem] text-limestone/65">{m.note}</span>
@@ -143,6 +147,7 @@ export default function ProjectDetails() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Next project */}
       <Link to={`/projects/${next.slug}`} className="group relative block h-[70svh] min-h-[26rem] overflow-hidden bg-basalt" aria-label={`Next project: ${next.title}`}>
@@ -151,7 +156,7 @@ export default function ProjectDetails() {
         <div className="shell relative flex h-full flex-col justify-center text-limestone">
           <p className="t-label text-limestone/80">Next project</p>
           <p className="t-h1 mt-4 max-w-[16ch] transition-transform duration-700 ease-[var(--ease-sculpt)] group-hover:translate-x-3">{next.title}</p>
-          <p className="mt-4 text-limestone/80">{next.location}, {next.year}</p>
+          <p className="mt-4 text-limestone/80">{[next.location, next.year].filter(Boolean).join(', ') || next.discipline}</p>
         </div>
       </Link>
 
@@ -173,7 +178,7 @@ export default function ProjectDetails() {
         title={['Planning something', 'like this?']}
         text={`Tell us about your site and timeline. If ${project.title} is close to what you have in mind, mention it and we will start from there.`}
         whatsappText={`Hello, I saw ${project.title} on your website and would like to discuss a similar project.`}
-        image={project.gallery[0]?.image || 'mu-arches'}
+        image={project.gallery[0]?.image || project.hero}
       />
     </PageTransition>
   )

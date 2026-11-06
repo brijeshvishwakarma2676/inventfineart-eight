@@ -11,12 +11,13 @@ import { products } from '../data/products'
 import { ease } from '../lib/motion'
 
 // A repeating rhythm of widths, aspect ratios and offsets, so the grid reads like a hung wall rather than a shop shelf.
+// Each slot has a frame for upright photographs and one for landscape photographs (`wide` pieces), so no work is cropped badly.
 const rhythm = [
-  { col: 'md:col-span-7', aspect: 'aspect-[4/5]' },
-  { col: 'md:col-span-4 md:col-start-9 md:mt-40', aspect: 'aspect-[3/4]' },
-  { col: 'md:col-span-4 md:col-start-2', aspect: 'aspect-[3/4]' },
-  { col: 'md:col-span-5 md:col-start-7 md:mt-24', aspect: 'aspect-[4/5]' },
-  { col: 'md:col-span-6 md:col-start-4', aspect: 'aspect-[16/11]' },
+  { col: 'md:col-span-7', aspect: 'aspect-[4/5]', wide: 'aspect-[4/3]' },
+  { col: 'md:col-span-4 md:col-start-9 md:mt-40', aspect: 'aspect-[3/4]', wide: 'aspect-[4/3]' },
+  { col: 'md:col-span-4 md:col-start-2', aspect: 'aspect-[3/4]', wide: 'aspect-[4/3]' },
+  { col: 'md:col-span-5 md:col-start-7 md:mt-24', aspect: 'aspect-[4/5]', wide: 'aspect-[4/3]' },
+  { col: 'md:col-span-6 md:col-start-4', colTall: 'md:col-span-4 md:col-start-5', aspect: 'aspect-[4/5]', wide: 'aspect-[16/11]' },
 ]
 
 export default function Collections() {
@@ -93,7 +94,7 @@ export default function Collections() {
           <AnimatePresence mode="popLayout">
             {items.map((p, i) => {
               const r = rhythm[i % rhythm.length]
-              return <ProductCard key={p.slug} product={p} index={i} aspect={r.aspect} className={r.col} />
+              return <ProductCard key={p.slug} product={p} index={i} aspect={p.wide ? r.wide : r.aspect} className={p.wide ? r.col : r.colTall || r.col} />
             })}
           </AnimatePresence>
         </motion.div>

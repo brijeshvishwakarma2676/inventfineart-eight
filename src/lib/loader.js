@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { lockScroll } from './smoothScroll'
 
 // The opening loader lives in index.html so it paints before any JavaScript arrives.
 // This module decides when it may leave, lifts it away, and tells the page when to start its own entrance.
@@ -23,8 +24,10 @@ const pageLoaded = () =>
 
 export async function finishLoader() {
   if (!el) return
+  lockScroll('loader', true)
   // index.html's safety net already lifted it (very slow start): just let the page play its entrance.
   if (!el.isConnected || el.classList.contains('is-leaving')) {
+    lockScroll('loader', false)
     done = true
     notify()
     return
@@ -40,7 +43,7 @@ export async function finishLoader() {
     // storage unavailable: treat as a first visit
   }
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const minimum = seen || reduce ? 350 : 2100 // ms from the first paint, long enough for the drawing to finish
+  const minimum = seen || reduce ? 350 : 2400 // ms from the first paint, long enough for the drawing to finish
 
   const ready = Promise.all([
     document.fonts?.ready.then(() => setProgress(0.7)),
@@ -55,6 +58,7 @@ export async function finishLoader() {
   await wait(reduce ? 0 : 280) // let the line reach the end before the panel lifts
   el.classList.add('is-leaving')
   document.documentElement.classList.remove('is-loading')
+  lockScroll('loader', false)
 
   // The hero's arch starts rising while the panel is still lifting, so the two read as one movement.
   setTimeout(() => {

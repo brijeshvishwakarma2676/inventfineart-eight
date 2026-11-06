@@ -9,7 +9,7 @@ export default function FeaturedProjects() {
     <section className="py-24 md:py-36" aria-label="Featured projects">
       <div className="shell">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <SectionHeading title="Featured projects" intro="Recent commissions for hotels, homes, offices and public spaces." />
+          <SectionHeading title="Featured projects" intro="Work made in our own factory and fixed on site, for homes, offices and public spaces." />
           <Link to="/projects" className="link-line self-start text-[0.9375rem] font-medium md:self-auto">
             See all projects
           </Link>
@@ -19,7 +19,7 @@ export default function FeaturedProjects() {
 
         <div className="mt-24 grid gap-24 md:mt-36 md:grid-cols-12 md:gap-8">
           <ProjectCard project={second} aspect="aspect-[4/5]" className="md:col-span-6" />
-          <ProjectCard project={third} aspect="aspect-[3/4]" className="md:col-span-4 md:col-start-9 md:mt-48" />
+          <ProjectCard project={third} aspect="aspect-[4/3]" className="md:col-span-4 md:col-start-9 md:mt-48" />
         </div>
 
         {fourth && (

@@ -46,7 +46,7 @@ export default function ProductCard({ product, aspect = 'aspect-[4/5]', classNam
             {product.name}
             <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-bronze transition-transform duration-700 ease-[var(--ease-sculpt)] group-hover:scale-x-100" />
           </h3>
-          <span className="t-label shrink-0 text-ash">{product.code}</span>
+          {product.code && <span className="t-label shrink-0 text-ash">{product.code}</span>}
         </div>
         <p className="mt-2 max-w-[34rem] text-[0.975rem] leading-relaxed text-ash">{product.summary}</p>
       </Link>

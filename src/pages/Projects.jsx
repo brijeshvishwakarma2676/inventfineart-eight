@@ -14,11 +14,11 @@ const placements = [
   { className: 'md:col-span-6 md:col-start-7 md:mt-48', aspect: 'aspect-[4/3]' },
   { className: 'md:col-span-8 md:col-start-3', aspect: 'aspect-[4/3] md:aspect-[16/9]' },
   { className: 'md:col-span-6', aspect: 'aspect-[4/3]' },
-  { className: 'md:col-span-4 md:col-start-9 md:mt-32', aspect: 'aspect-[3/4]' },
+  { className: 'md:col-span-5 md:col-start-8 md:mt-32', aspect: 'aspect-[4/3]' },
 ]
 
 export default function Projects() {
-  usePageMeta('Projects', 'Commissions by Invent Fine Art: sculpture, murals, planters and GRC facades for hotels, homes, offices and public spaces.')
+  usePageMeta('Projects', 'Executed work by Invent Fine Art: landmarks and statues, water features, murals, GRC façades, interiors, pergolas and gazebos.')
   return (
     <PageTransition>
       <section className="shell pb-16 pt-32 md:pb-24 md:pt-44">
@@ -30,7 +30,7 @@ export default function Projects() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: 0.45 }}
           >
-            A selection of commissions from the last few years, each designed for one site and made in our workshop.
+            Work we have designed, made in our own factory and fixed on site, grouped by kind.
           </motion.p>
         </div>
       </section>

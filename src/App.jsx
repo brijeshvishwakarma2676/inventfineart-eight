@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import { AnimatePresence, MotionConfig } from 'motion/react'
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
+import { scrollToTop } from './lib/smoothScroll'
 
 // The landing page ships in the main bundle; every other page loads on first visit.
 const About = lazy(() => import('./pages/About'))
@@ -24,7 +25,7 @@ function AnimatedRoutes() {
   const location = useLocation()
   return (
     // The old page lifts away before the new one settles in; scroll resets in between.
-    <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>
+    <AnimatePresence mode="wait" onExitComplete={scrollToTop}>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={page(Home)} />
         <Route path="/about" element={page(About)} />

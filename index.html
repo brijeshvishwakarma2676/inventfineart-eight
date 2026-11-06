@@ -11,7 +11,7 @@
     <meta property="og:description" content="Sculptures, designer planters, murals, GRC and FRP products, made to your design in our own factory." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <style>
-      /* Opening loader: an arch drawn in one line, the bronze circle set into it, then the name.
+      /* Opening loader: the cairn from the Invent Fine Art logo, its stones set one on another, then the name.
          Inline so it paints before the app's JavaScript and CSS arrive. src/lib/loader.js lifts it away. */
       html.is-loading, html.is-loading body { overflow: hidden; }
       #loader {
@@ -32,19 +32,22 @@
       }
       #loader.is-leaving .l-inner { opacity: 0; transform: translateY(-8vh); }
 
-      .l-mark { width: clamp(64px, 5.4vw, 84px); aspect-ratio: 28 / 33; height: auto; overflow: visible; }
-      .l-ground, .l-arch { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
-      .l-ground { stroke-width: 0.55; opacity: 0.35; animation: l-draw 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards; }
-      .l-arch { stroke-width: 1.1; animation: l-draw 1.25s cubic-bezier(0.65, 0, 0.35, 1) 0.35s forwards; }
-      .l-dot {
-        fill: var(--bronze); opacity: 0; transform: translateY(-9px); transform-box: fill-box;
-        animation: l-dot 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.45s forwards;
+      .l-mark { width: clamp(68px, 5.6vw, 88px); aspect-ratio: 1; height: auto; overflow: visible; }
+      .l-ground { fill: none; stroke: var(--ink); stroke-width: 0.4; stroke-linecap: round; opacity: 0; animation: l-fade 0.6s ease 0.05s forwards; }
+      .l-stone {
+        fill: var(--ink); opacity: 0; transform: translateY(-7px); transform-box: fill-box; transform-origin: 50% 100%;
+        animation: l-set 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
+      .l-stone:nth-of-type(1) { animation-delay: 0.2s; }
+      .l-stone:nth-of-type(2) { animation-delay: 0.55s; }
+      .l-stone:nth-of-type(3) { animation-delay: 0.88s; }
+      .l-stone:nth-of-type(4) { animation-delay: 1.2s; }
       .l-word {
-        margin-top: 1.6rem;
-        font-family: Marcellus, 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.65rem, 2.1vw, 2.15rem); letter-spacing: 0.02em; line-height: 1;
+        display: flex; flex-direction: column; align-items: flex-end; margin-top: 1.5rem; line-height: 1;
         clip-path: inset(0 100% 0 0); opacity: 0;
       }
+      .l-word b { font-family: 'Albert Sans', ui-sans-serif, system-ui, sans-serif; font-weight: 600; font-size: clamp(1.9rem, 2.4vw, 2.5rem); letter-spacing: 0.06em; }
+      .l-word i { margin-top: 0.3rem; font-style: normal; font-family: Marcellus, Georgia, serif; font-size: clamp(0.95rem, 1.05vw, 1.1rem); letter-spacing: 0.04em; color: var(--ash); }
       .l-sub {
         margin-top: 0.85rem;
         font-family: 'Albert Sans', ui-sans-serif, system-ui, sans-serif; font-size: 0.6875rem; font-weight: 500;
@@ -60,14 +63,13 @@
       }
       .l-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-      @keyframes l-draw { to { stroke-dashoffset: 0; } }
-      @keyframes l-dot { to { opacity: 1; transform: translateY(0); } }
+      @keyframes l-set { 0% { opacity: 0; transform: translateY(-7px); } 70% { opacity: 1; transform: translateY(0.4px) scaleY(0.94); } 100% { opacity: 1; transform: none; } }
       @keyframes l-word { to { clip-path: inset(0 0 0 0); opacity: 1; } }
       @keyframes l-fade { to { opacity: 1; } }
 
       @media (prefers-reduced-motion: reduce) {
-        .l-ground, .l-arch { animation: none; stroke-dashoffset: 0; }
-        .l-dot { animation: none; opacity: 1; transform: none; }
+        .l-ground { animation: none; opacity: 1; }
+        .l-stone { animation: none !important; opacity: 1; transform: none; }
         .l-word, .l-sub { animation: none !important; clip-path: none; opacity: 1; }
         #loader { transition: opacity 0.4s ease; }
         #loader.is-leaving { transform: none; opacity: 0; }
@@ -78,12 +80,14 @@
   <body>
     <div id="loader" role="status">
       <div class="l-inner">
-        <svg class="l-mark" viewBox="0 0 28 33" aria-hidden="true">
-          <path class="l-ground" pathLength="1" d="M0 31.5H28" />
-          <path class="l-arch" pathLength="1" d="M3 31.5V14a11 11 0 0 1 22 0v17.5" />
-          <circle class="l-dot" cx="14" cy="21" r="4" />
+        <svg class="l-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path class="l-ground" d="M-2 31.2H34" />
+          <ellipse class="l-stone" cx="16" cy="27.2" rx="13" ry="3.4" />
+          <ellipse class="l-stone" cx="15.4" cy="20.1" rx="9.6" ry="2.9" />
+          <ellipse class="l-stone" cx="16.4" cy="13.9" rx="6.6" ry="2.5" />
+          <ellipse class="l-stone" cx="15.8" cy="8.3" rx="3.6" ry="2.3" />
         </svg>
-        <p class="l-word" aria-hidden="true">Invent Fine Art</p>
+        <p class="l-word" aria-hidden="true"><b>INVENT</b><i>Fine Art</i></p>
         <p class="l-sub" aria-hidden="true">Sculpture · Planters · Murals · FRP &amp; GRC</p>
         <div class="l-line" aria-hidden="true"><span></span></div>
         <span class="l-sr">Loading Invent Fine Art</span>
@@ -93,11 +97,11 @@
       (function () {
         var loader = document.getElementById('loader')
         loader.dataset.start = String(performance.now())
-        // Set the name only once its typeface is in, and once the arch is mostly drawn, so it never swaps fonts mid-reveal.
+        // Set the name only once its typefaces are in, and once the stones are mostly stacked, so it never swaps fonts mid-reveal.
         var typed = false
         function type() { if (!typed) { typed = true; loader.classList.add('l-type') } }
-        var fonts = document.fonts && document.fonts.load ? document.fonts.load('1em Marcellus') : Promise.resolve()
-        Promise.all([fonts, new Promise(function (r) { setTimeout(r, 1150) })]).then(type, type)
+        var fonts = document.fonts && document.fonts.load ? Promise.all([document.fonts.load('1em Marcellus'), document.fonts.load('600 1em "Albert Sans"')]) : Promise.resolve()
+        Promise.all([fonts, new Promise(function (r) { setTimeout(r, 1300) })]).then(type, type)
         setTimeout(type, 2400)
         // Safety net: if the app never starts, don't leave the visitor behind the loader.
         setTimeout(function () {

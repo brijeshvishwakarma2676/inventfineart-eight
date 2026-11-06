@@ -45,17 +45,19 @@ const capabilities = [
 
 const techniques = [
   { name: 'GRC', image: 'ifa-grc-facade', text: 'Screens, facade panels, columns and relief.', className: 'col-span-2 md:col-span-5', aspect: 'aspect-[4/5]' },
-  { name: 'FRP', image: 'sc-ribbon', text: 'Seamless, light forms that span.', className: 'md:col-span-3 md:mt-40', aspect: 'aspect-[3/4]' },
+  { name: 'FRP', image: 'ifa-wave-sculpture', text: 'Seamless, light forms that span.', className: 'md:col-span-3 md:mt-40', aspect: 'aspect-[3/4]' },
   { name: 'Bronze', image: 'ifa-bronze-birds', text: 'For sculpture, indoors and out.', className: 'md:col-span-4 md:mt-16', aspect: 'aspect-square' },
   { name: 'Murals and wall features', image: 'ifa-leaf-lights', text: 'Relief, metal and lit pieces made for one wall.', className: 'col-span-2 md:col-span-6 md:col-start-4 md:-mt-8', aspect: 'aspect-[16/10]' },
 ]
 
+// Work in progress, from the client's own photographs.
 const behindTheScenes = [
-  { image: 'st-workshop', caption: 'A pattern on the turntable, mid-shaping.', aspect: 'aspect-[3/4]' },
-  { image: 'st-moulds', caption: 'Moulds racked for the next casting run.', aspect: 'aspect-[16/10]' },
-  { image: 'st-sketch', caption: 'Setting out a monolith at full scale.', aspect: 'aspect-[16/10]' },
-  { image: 'sc-cairn', caption: 'Cairn stones before their final tones.', aspect: 'aspect-[3/4]' },
-  { image: 'st-texture', caption: 'Flutes, hand-sanded and sealed.', aspect: 'aspect-square' },
+  { image: 'ifa-clay-portrait', caption: 'A portrait statue, still in clay.', aspect: 'aspect-[3/4]' },
+  { image: 'ifa-machine-lion-workshop', caption: 'The lion of machine parts, in the workshop.', aspect: 'aspect-[3/4]' },
+  { image: 'ifa-rockery-build', caption: 'A rock wall taking shape on site.', aspect: 'aspect-[16/10]' },
+  { image: 'ifa-dancers-workshop', caption: 'Two dancers, before finishing.', aspect: 'aspect-[3/4]' },
+  { image: 'ifa-heritage-facade', caption: 'A heritage-style façade, during installation.', aspect: 'aspect-[4/3]' },
+  { image: 'ifa-facade-install', caption: 'Cladding panels being fixed.', aspect: 'aspect-[3/5]' },
 ]
 
 export default function About() {
@@ -86,7 +88,7 @@ export default function About() {
         </div>
       </section>
 
-      <ImageReveal src={img('st-moulds')} alt="Shelves of plaster and fibreglass moulds" parallax className="aspect-[4/3] w-full md:aspect-[21/8]" />
+      <ImageReveal src={img('ifa-machine-lion')} alt="A lion made of machine parts, in the Invent Fine Art workshop" parallax className="aspect-[4/3] w-full md:aspect-[21/8]" imgClassName="object-[50%_60%]" />
 
       {/* Philosophy */}
       <section className="py-24 md:py-40">
@@ -122,6 +124,8 @@ export default function About() {
           <div className="md:col-span-4">
             <div className="md:sticky md:top-32">
               <SectionHeading title="Our facility" intro="Four units working together as one facility, so every piece is made, checked and packed by us." />
+              <ImageReveal src={img('ifa-spinning-wheel')} alt="A figure at the spinning wheel, finished in banded metal tones" className="mt-12 hidden aspect-[3/4] w-[78%] md:block" delay={0.1} />
+              <p className="t-label mt-3 hidden text-ash md:block">Figure at the spinning wheel, made in our factory.</p>
             </div>
           </div>
           <ol className="md:col-span-7 md:col-start-6">
@@ -193,7 +197,7 @@ export default function About() {
       {/* Behind the scenes */}
       <section className="py-24 md:py-36" aria-label="Behind the scenes">
         <div className="shell flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeading title="Behind the scenes" intro="A few days in the workshop." />
+          <SectionHeading title="Behind the scenes" intro="Work in progress, in the workshop and on site." />
           <p className="t-label text-ash">Scroll sideways to see more</p>
         </div>
         <div className="mt-14 overflow-x-auto overscroll-x-contain pb-6 [scrollbar-width:thin]" tabIndex={0} aria-label="Workshop photographs">
@@ -215,6 +219,7 @@ export default function About() {
       <CustomCTA
         title={['Bring us a drawing,', 'a photograph or', 'just the address.']}
         text="Every project starts with a conversation and, wherever possible, a visit to the site. Tell us what you have in mind and we will tell you how we would make it."
+        image="ifa-kite-flyer"
       />
     </PageTransition>
   )

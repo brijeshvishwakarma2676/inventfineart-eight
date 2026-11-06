@@ -5,12 +5,13 @@ import ImageReveal from '../ImageReveal'
 import { img } from '../../data/images'
 import { ease } from '../../lib/motion'
 
+// How we work, in the client's own words (old site about-us.html and the 2026-10-24 brief; site-v4 content.js).
 const steps = [
-  { title: 'Concept', time: 'Week 1', text: 'We visit the site, study the drawings and talk through how the space is used. You receive sketches and two or three directions, each with an honest budget.' },
-  { title: 'Design', time: 'Weeks 2 to 4', text: 'The chosen direction is developed as a 3D model and shop drawings, with material samples and finishes matched to your site. Nothing is cast until you sign these off.' },
-  { title: 'Development', time: 'Weeks 4 to 6', text: 'Our sculptors shape the full-size pattern in clay or CNC-cut foam, and our mould-makers build the moulds that every piece will be cast from.' },
-  { title: 'Fabrication', time: 'Weeks 6 to 12', text: 'Pieces are cast in GRC or laminated in FRP, cured, then finished by hand. You are welcome in the workshop at any point to see work in progress.' },
-  { title: 'Installation', time: 'On site', text: 'The team that made the work installs it, with our own fixings, lifting gear and supervision. We hand over care notes and stay on call afterwards.' },
+  { title: 'Concept', time: 'Your idea', text: 'Share your idea: a sketch, a reference photo or a drawing, with the size and the site.' },
+  { title: 'Design', time: 'A miniature first', text: 'Our artisans and product designers develop the piece as per your design and requirement, with a 3D-printed miniature for your approval.' },
+  { title: 'Manufacture', time: 'Our own factory', text: 'Made in our manufacturing unit, which runs round the clock, with the latest tools, technology and machinery.' },
+  { title: 'Quality check', time: 'Before it leaves', text: 'Each piece is examined on numerous factors by our quality control unit before delivery.' },
+  { title: 'Packing and fixing', time: 'On site', text: 'Delivered in premium quality packing, and fixed on site where required.' },
 ]
 
 export default function Process() {
@@ -25,9 +26,10 @@ export default function Process() {
           <div className="md:sticky md:top-32">
             <SectionHeading
               title="From sketch to site"
-              intro="Five stages, one team. A typical commission takes ten to sixteen weeks from first visit to installation."
+              intro="Five stages, one team, from the first concept to the complete execution."
             />
-            <ImageReveal src={img('st-sketch')} alt="Concept drawing of an arch with a circular void" className="mt-12 hidden aspect-[16/10] md:block" />
+            <ImageReveal src={img('ifa-eagle-drawing')} alt="Ink concept drawing of an eagle, a sword and an anchor on a rock base" className="mt-12 hidden aspect-[16/11] md:block" imgClassName="object-[50%_40%]" />
+            <p className="t-label mt-3 hidden text-ash md:block">Concept drawing for a landmark, before it was made.</p>
           </div>
         </div>
 

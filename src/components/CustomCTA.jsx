@@ -11,7 +11,7 @@ import { fadeUp, viewport } from '../lib/motion'
 export default function CustomCTA({
   title = ['Have a wall, a courtyard', 'or a facade waiting', 'for something?'],
   text = 'Tell us about the space, the people who will use it and the date it needs to be ready. We will come back within two working days with first thoughts, a rough budget and the questions we need answered.',
-  image = 'mu-arches',
+  image = 'ifa-red-runner',
   whatsappText,
 }) {
   return (

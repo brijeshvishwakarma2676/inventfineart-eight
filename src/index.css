@@ -117,6 +117,11 @@
   }
 }
 
+/* The workshop strip on Home: two identical halves, so moving by half loops without a seam */
+@keyframes strip {
+  to { transform: translateX(-50%); }
+}
+
 /* Fine mineral grain over the whole page, like a printed plate */
 body::after {
   content: "";

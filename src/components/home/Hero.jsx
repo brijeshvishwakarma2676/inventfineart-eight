@@ -91,7 +91,8 @@ export default function Hero() {
           {/* Words on the wall */}
           <motion.div className="relative z-10 h-full" style={reduce ? undefined : { opacity: textOpacity, y: textY }}>
             <div className="shell flex h-full flex-col pt-[6.5rem] md:pt-[8.5rem]">
-              <RevealText as="h1" text={['Where art', 'meets architecture.']} className="t-display max-w-[11ch] md:max-w-none" animateOnMount delay={0.55} />
+              {/* On desktop the size is capped so "meets architecture." ends before the arch opening (which starts at 55vw) */}
+              <RevealText as="h1" text={['Where art', 'meets architecture.']} className="t-display max-w-[11ch] md:max-w-none md:text-[clamp(2.6rem,5.7vw,7rem)]" animateOnMount delay={0.55} />
 
               <div className="mt-auto hidden max-w-[29rem] pb-12 md:block">
                 <motion.p

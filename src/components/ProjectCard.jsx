@@ -23,7 +23,8 @@ export default function ProjectCard({ project, aspect = 'aspect-[4/5]', layout =
     y.set(e.clientY - r.top)
   }
 
-  const meta = `${project.client}, ${project.location}, ${project.year}`
+  // Client, place and year appear once the client allows naming them; until then, how many photographs the project holds.
+  const meta = [project.client, project.location, project.year].filter(Boolean).join(', ') || `${project.gallery.length + 1} photographs`
 
   return (
     <article className={className}>

@@ -56,7 +56,10 @@ export default function Footer() {
             <div className="col-span-2 sm:col-span-1">
               <h3 className="t-label text-limestone/60">Contact</h3>
               <ul className="mt-5 space-y-3">
-                <li><a href={`mailto:${site.email}`} className="link-line break-all">{site.email}</a></li>
+                <li>
+                  {/* Breaks, if it must, before the @ rather than mid-word */}
+                  <a href={`mailto:${site.email}`} className="link-line">{site.email.split('@')[0]}<wbr />@{site.email.split('@')[1]}</a>
+                </li>
                 {site.phones.map((p) => (
                   <li key={p.href}><a href={`tel:${p.href}`} className="link-line">{p.label}</a></li>
                 ))}

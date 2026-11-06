@@ -23,7 +23,9 @@ export default function ProductDetails() {
   const category = categoryBySlug[product.category]
   const related = products.filter((p) => p.category === product.category && p.slug !== product.slug).slice(0, 2)
   const fill = related.length < 2 ? products.filter((p) => p.category !== product.category).slice(0, 2 - related.length) : []
-  const enquiry = `/contact?piece=${encodeURIComponent(`${product.name} (${product.code})`)}&type=${product.category}`
+  const label = product.code ? `${product.name} (${product.code})` : product.name
+  const enquiry = `/contact?piece=${encodeURIComponent(label)}&type=${product.category}`
+  const specs = { Service: category.name, ...(product.code && { 'Catalogue no.': product.code }), ...product.specs }
 
   return (
     <PageTransition>
@@ -40,7 +42,7 @@ export default function ProductDetails() {
 
         <div className="mt-10 grid gap-14 md:mt-14 md:grid-cols-12 md:gap-8">
           <div className="space-y-4 md:col-span-7 md:space-y-8">
-            <ImageReveal src={img(product.images[0])} alt={product.name} priority className="aspect-[4/5]" />
+            <ImageReveal src={img(product.images[0])} alt={product.name} priority className={product.wide ? 'aspect-[4/3]' : 'aspect-[4/5]'} />
             {product.images.slice(1).map((name) => (
               <ImageReveal key={name} src={img(name)} alt={`${product.name}, detail and process`} parallax className="hidden aspect-[4/3] md:ml-[18%] md:block" />
             ))}
@@ -48,23 +50,19 @@ export default function ProductDetails() {
 
           <div className="md:col-span-4 md:col-start-9">
             <div className="md:sticky md:top-28">
-              <p className="t-label text-bronze">{category.name}, catalogue no. {product.code}</p>
+              <p className="t-label text-bronze">{product.code ? `${category.name}, catalogue no. ${product.code}` : category.name}</p>
               <RevealText as="h1" text={product.name} className="t-h2 mt-4" animateOnMount delay={0.2} />
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease, delay: 0.5 }}>
                 <p className="t-lead mt-6 text-graphite">{product.summary}</p>
-                <p className="mt-5 leading-[1.75] text-ash">{product.description}</p>
+                {product.description && <p className="mt-5 leading-[1.75] text-ash">{product.description}</p>}
 
                 <dl className="mt-10">
-                  {Object.entries(product.specs).map(([k, v]) => (
-                    <div key={k} className="grid grid-cols-[7.5rem_1fr] gap-4 border-t border-graphite/15 py-3.5 text-[0.95rem]">
+                  {Object.entries(specs).map(([k, v]) => (
+                    <div key={k} className="grid grid-cols-[7.5rem_1fr] gap-4 border-t border-graphite/15 py-3.5 text-[0.95rem] last:border-b">
                       <dt className="text-ash">{k}</dt>
                       <dd>{v}</dd>
                     </div>
                   ))}
-                  <div className="grid grid-cols-[7.5rem_1fr] gap-4 border-y border-graphite/15 py-3.5 text-[0.95rem]">
-                    <dt className="text-ash">Suitable for</dt>
-                    <dd>{product.use}</dd>
-                  </div>
                 </dl>
 
                 <p className="mt-6 text-[0.95rem] leading-relaxed text-ash">
@@ -74,7 +72,7 @@ export default function ProductDetails() {
                 <div className="mt-8 flex flex-col gap-3">
                   <Button to={enquiry} size="lg">Enquire about this piece</Button>
                   <Button
-                    href={whatsappLink(`Hello, I am interested in ${product.name} (${product.code}). Could you share sizes and pricing?`)}
+                    href={whatsappLink(`Hello, I am interested in ${label}. Could you share sizes and pricing?`)}
                     variant="outline"
                     size="lg"
                     icon={MessageCircle}
@@ -103,7 +101,7 @@ export default function ProductDetails() {
           </div>
           <div className="mt-14 grid gap-16 sm:grid-cols-2 md:grid-cols-12 md:gap-8">
             {[...related, ...fill].map((p, i) => (
-              <ProductCard key={p.slug} product={p} aspect={i === 0 ? 'aspect-[4/5]' : 'aspect-[3/4]'} className={i === 0 ? 'md:col-span-6' : 'md:col-span-4 md:col-start-9 md:mt-28'} />
+              <ProductCard key={p.slug} product={p} aspect={p.wide ? 'aspect-[4/3]' : i === 0 ? 'aspect-[4/5]' : 'aspect-[3/4]'} className={i === 0 ? 'md:col-span-6' : 'md:col-span-4 md:col-start-9 md:mt-28'} />
             ))}
           </div>
         </div>

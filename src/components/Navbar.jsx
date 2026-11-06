@@ -3,15 +3,20 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react'
 import { navigation, site, whatsappLink } from '../data/site'
 import { ease } from '../lib/motion'
+import LogoMark from './LogoMark'
+import { lockScroll } from '../lib/smoothScroll'
 
 function Wordmark({ onClick }) {
   return (
-    <Link to="/" onClick={onClick} className="group flex items-center gap-3" aria-label={`${site.name}, home`}>
-      <svg viewBox="0 0 28 32" className="h-8 w-7" aria-hidden="true">
-        <path d="M3 31V14a11 11 0 0 1 22 0v17" fill="none" stroke="currentColor" strokeWidth="2" />
-        <circle cx="14" cy="21" r="4" className="fill-bronze transition-transform duration-700 ease-[var(--ease-sculpt)] group-hover:-translate-y-1" />
-      </svg>
-      <span className="font-display text-[1.35rem] leading-none tracking-[0.01em]">{site.name}</span>
+    <Link to="/" onClick={onClick} className="group flex items-center gap-2.5" aria-label={`${site.name}, home`}>
+      <LogoMark
+        className="h-9 w-9 -translate-y-px"
+        topClassName="transition-transform duration-700 ease-[var(--ease-sculpt)] group-hover:-translate-y-1"
+      />
+      <span className="flex flex-col items-end leading-none" aria-hidden="true">
+        <span className="text-[1.3rem] font-semibold tracking-[0.06em]">INVENT</span>
+        <span className="mt-1 font-display text-[0.8rem] tracking-[0.04em] opacity-70">Fine Art</span>
+      </span>
     </Link>
   )
 }
@@ -34,6 +39,7 @@ export default function Navbar() {
 
   useEffect(() => {
     document.documentElement.style.overflow = open ? 'hidden' : ''
+    lockScroll('menu', open)
     if (!open) return
     const onKey = (e) => {
       if (e.key === 'Escape') {
