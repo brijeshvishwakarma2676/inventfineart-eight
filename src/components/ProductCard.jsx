@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import Img from './Img'
-import { img } from '../data/images'
+import { img, srcSetFor } from '../data/images'
 import { categoryBySlug } from '../data/categories'
 import { ease } from '../lib/motion'
 
@@ -11,6 +12,10 @@ import { ease } from '../lib/motion'
  */
 export default function ProductCard({ product, aspect = 'aspect-[4/5]', className = '', index = 0 }) {
   const [lead, second] = product.images
+  // The hover view is only fetched once a mouse first reaches the card: touch screens never show it, and a page of
+  // cards no longer downloads and decodes twice the photos up front.
+  const [armed, setArmed] = useState(false)
+  const arm = (e) => e.pointerType === 'mouse' && setArmed(true)
   return (
     <motion.article
       layout
@@ -20,16 +25,18 @@ export default function ProductCard({ product, aspect = 'aspect-[4/5]', classNam
       transition={{ duration: 0.9, ease, delay: Math.min(index, 6) * 0.06 }}
       className={className}
     >
-      <Link to={`/collections/${product.slug}`} className="group block">
+      <Link to={`/collections/${product.slug}`} className="group block" onPointerEnter={second ? arm : undefined}>
         <div className={`relative overflow-hidden bg-plaster ${aspect}`}>
           <Img
             src={img(lead)}
             alt={`${product.name}, ${categoryBySlug[product.category].name.toLowerCase()}`}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-[var(--ease-sculpt)] group-hover:scale-[1.05]"
           />
-          {second && (
+          {second && armed && (
             <img
               src={img(second)}
+              srcSet={srcSetFor(img(second))}
+              sizes="auto, 50vw"
               alt=""
               aria-hidden="true"
               loading="lazy"

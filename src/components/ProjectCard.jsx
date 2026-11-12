@@ -35,7 +35,7 @@ export default function ProjectCard({ project, aspect = 'aspect-[4/5]', layout =
           onPointerLeave={() => setHovering(false)}
           onPointerMove={onMove}
         >
-          <ImageReveal src={img(project.hero)} alt={project.title} className={aspect} hover priority={priority} />
+          <ImageReveal src={img(project.hero)} alt={project.title} className={aspect} imgClassName={project.heroFocus} hover priority={priority} />
           {!reduce && (
             <motion.span
               aria-hidden="true"

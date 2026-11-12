@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading'
 import ImageReveal from '../components/ImageReveal'
 import CustomCTA from '../components/CustomCTA'
 import Img from '../components/Img'
+import Press from '../components/Press'
 import usePageMeta from '../hooks/usePageMeta'
 import { img } from '../data/images'
 import { site } from '../data/site'
@@ -54,6 +55,9 @@ const techniques = [
 const behindTheScenes = [
   { image: 'ifa-clay-portrait', caption: 'A portrait statue, still in clay.', aspect: 'aspect-[3/4]' },
   { image: 'ifa-machine-lion-workshop', caption: 'The lion of machine parts, in the workshop.', aspect: 'aspect-[3/4]' },
+  { image: 'ks-pointing-frame', caption: 'Carving a figure, measured point by point from the model.', aspect: 'aspect-[3/4]' },
+  { image: 'ks-stone-team', caption: 'Dressing a stone block by hand.', aspect: 'aspect-[4/3]' },
+  { image: 'ks-hawker-workshop', caption: 'The Sculpture of Hawker, being wound in wire.', aspect: 'aspect-[3/4]' },
   { image: 'ifa-rockery-build', caption: 'A rock wall taking shape on site.', aspect: 'aspect-[16/10]' },
   { image: 'ifa-dancers-workshop', caption: 'Two dancers, before finishing.', aspect: 'aspect-[3/4]' },
   { image: 'ifa-heritage-facade', caption: 'A heritage-style façade, during installation.', aspect: 'aspect-[4/3]' },
@@ -215,6 +219,8 @@ export default function About() {
           </ul>
         </div>
       </section>
+
+      <Press />
 
       <CustomCTA
         title={['Bring us a drawing,', 'a photograph or', 'just the address.']}

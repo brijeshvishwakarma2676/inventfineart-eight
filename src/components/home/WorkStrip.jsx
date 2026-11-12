@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useReducedMotion } from 'motion/react'
+import { useRef } from 'react'
+import { useInView, useReducedMotion } from 'motion/react'
 import SectionHeading from '../SectionHeading'
 import Img from '../Img'
 import { img } from '../../data/images'
@@ -17,8 +18,9 @@ const work = [
   { image: 'ifa-leaf-lights', caption: 'Illuminated leaf wall lights', ratio: '4 / 3' },
   { image: 'ifa-climbing-columns', caption: 'Columns of climbing figures', ratio: '5 / 6' },
   { image: 'ifa-garden-pergola', caption: 'Garden pergola', ratio: '3 / 2' },
-  { image: 'ifa-buddha-head', caption: 'Buddha head', ratio: '3 / 4' },
+  { image: 'ks-hawker-trees', caption: 'Sculpture of Hawker', ratio: '3 / 4' },
   { image: 'ifa-wave-sculpture', caption: 'Wave wall sculpture', ratio: '5 / 4' },
+  { image: 'ks-embrace-studio', caption: 'Embrace, in stone', ratio: '5 / 7' },
 ]
 
 /**
@@ -27,6 +29,8 @@ const work = [
  */
 export default function WorkStrip() {
   const reduce = useReducedMotion()
+  const stripRef = useRef(null)
+  const onScreen = useInView(stripRef, { margin: '200px 0px' }) // the loop only runs while it can be seen
   const items = reduce ? work : [...work, ...work] // the second copy makes the loop seamless
 
   return (
@@ -35,7 +39,7 @@ export default function WorkStrip() {
         <SectionHeading
           context="From the workshop"
           title={`${new Date().getFullYear() - site.founded} years of work, made by hand.`}
-          intro="Sculpture, planters, murals and GRC, all made in our own factory near Mumbai."
+          intro="Sculpture in stone, metal and FRP, planters, murals and GRC, all made in our own factory near Mumbai."
         />
         <Link to="/projects" className="link-line self-start text-[0.9375rem] font-medium md:self-auto">
           See the projects
@@ -43,12 +47,13 @@ export default function WorkStrip() {
       </div>
 
       <div
+        ref={stripRef}
         className={`group/strip mt-14 md:mt-20 ${reduce ? 'overflow-x-auto pb-4' : ''}`}
         style={{ maskImage: 'linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent)' }}
       >
         <ul
           className={`flex w-max items-end ${
-            reduce ? 'gap-4 px-[clamp(1.25rem,4vw,3.5rem)] md:gap-6' : 'animate-[strip_90s_linear_infinite] group-hover/strip:[animation-play-state:paused]'
+            reduce ? 'gap-4 px-[clamp(1.25rem,4vw,3.5rem)] md:gap-6' : `animate-[strip_90s_linear_infinite] group-hover/strip:[animation-play-state:paused] ${onScreen ? '' : '[animation-play-state:paused]'}`
           }`}
         >
           {items.map((w, i) => {

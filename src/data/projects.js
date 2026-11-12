@@ -2,6 +2,7 @@
 // plus façades, landmarks and interiors from its design photos). Every image is the client's own photograph.
 // No client names, places, years or sizes are given: none are confirmed for publishing yet. Add `client`,
 // `location` and `year` to a project once the client allows it, and the cards and page show them.
+// `heroFocus` (optional): a Tailwind object-position class, so wide crops of the hero keep the subject in frame.
 // Gallery `shape`: tall (portrait), wide (landscape) or square, matched to each photograph.
 export const projects = [
   {
@@ -15,7 +16,6 @@ export const projects = [
       'A landmark starts as a drawing. The eagle, sword and anchor below began as an ink drawing, then were made at full size and fixed on a rock base beside the road. The same studio makes portrait and equestrian statues, and group sculptures for public gardens.',
     gallery: [
       { image: 'ifa-eagle-drawing', alt: 'Ink drawing of an eagle, a sword and an anchor on a rock base', caption: 'The concept drawing for the eagle and sword landmark above.', shape: 'square' },
-      { image: 'ifa-freedom-of-press', alt: 'Statue of two figures reading a newspaper in a garden', caption: 'Statue of Freedom of Press.', shape: 'wide' },
       { image: 'ifa-equestrian', alt: 'Equestrian statue on a high plinth against the sky', caption: 'Equestrian statue on its plinth.', shape: 'wide' },
       { image: 'ifa-gandhi', alt: 'Bronze-finished statue of Gandhi walking with a staff', caption: 'Gandhi statue, before installation.', shape: 'tall' },
     ],
@@ -106,6 +106,49 @@ export const projects = [
       { image: 'ifa-gazebo', alt: 'Ornate dark gazebo in a garden', caption: 'Garden gazebo.', shape: 'wide' },
       { image: 'ifa-lattice-gazebo', alt: 'Gazebo with lattice screens on a terrace, being finished', caption: 'Gazebo with lattice screens.', shape: 'tall' },
       { image: 'ifa-columns', alt: 'Fluted white columns carrying a timber pergola', caption: 'Classical columns.', shape: 'wide' },
+    ],
+    featured: false,
+  },
+  // The two below are our founder's landmark commissions, from the "Kiran Stone" photographs, shown from block or
+  // wire frame to the finished piece. The Hawker page also shows the press cuttings, which name Lokmat Media and
+  // Nagpur (published coverage; see src/data/press.js).
+  {
+    slug: 'sculpture-of-hawker',
+    title: 'Sculpture of Hawker',
+    discipline: 'Sculpture',
+    categories: ['sculptures'],
+    hero: 'ks-hawker-sky',
+    heroFocus: 'object-[50%_0%]',
+    summary: 'A newspaper hawker on a real bicycle, the day’s paper held high, built coil by coil from wound metal wire.',
+    overview:
+      'A tribute to the hawkers who bring the paper to every door, in rain, summer or winter. Our founder first drew the figure in space as an open frame of rods, then wrapped it, coil by coil, in metal wire until it became a body. It rides a real bicycle, so the sculpture belongs to the street it stands on.',
+    gallery: [
+      { image: 'ks-hawker-armature', alt: 'Open frame of metal rods in the shape of a seated figure, in a workshop yard', caption: 'The figure, first drawn as an open frame of rods.', shape: 'tall' },
+      { image: 'ks-hawker-welding', alt: 'An artisan welding wire onto the frame of a large figure', caption: 'Wrapping the frame in wire, one coil at a time.', shape: 'tall' },
+      { image: 'ks-hawker-coils', alt: 'Close view of the figure covered in wound wire, with sparks from a grinder', caption: 'Nearly finished: every surface is wound wire.', shape: 'tall' },
+      { image: 'ks-hawker-front', alt: 'The finished hawker figure on a bicycle, holding a newspaper above his head', caption: 'Finished, on its bicycle.', shape: 'tall' },
+      { image: 'ks-hawker-rear', alt: 'The hawker sculpture seen from behind, newspaper raised against a blue sky', caption: 'From behind, the paper raised high.', shape: 'tall' },
+      { image: 'ks-hawker-unveiling', alt: 'The sculpture under a canopy of drapes at its unveiling, with guests gathered in front', caption: 'Unveiled at Samvidhan Square, Nagpur, in January 2015.', shape: 'square' },
+    ],
+    press: true, // shows the "In the press" cuttings (src/data/press.js)
+    featured: false,
+  },
+  {
+    slug: 'statue-of-freedom-of-press',
+    title: 'Statue of Freedom of Press',
+    discipline: 'Sculpture in stone',
+    categories: ['sculptures'],
+    hero: 'ks-press-sunset',
+    summary: 'Two figures reading the morning paper together, carved from single blocks of stone and lit from below at night.',
+    overview:
+      'The statue began as a raw block, dressed by hand in the stone yard. Our founder roughed out the two figures, then carved them down to the folds of the newspaper they share. The finished pair sits on a stepped plinth with lights set into it, so the stone glows after dark.',
+    gallery: [
+      { image: 'ks-stone-block', alt: 'A carver with a hammer on top of a large raw stone block', caption: 'A raw block, dressed by hand.', shape: 'tall' },
+      { image: 'ks-press-rough', alt: 'Two seated figures roughed out of stone, still showing tool marks', caption: 'The two figures, roughed out.', shape: 'tall' },
+      { image: 'ks-press-carving', alt: 'A carver working on the statue in a cloud of stone dust', caption: 'Carving the newspaper, in a cloud of dust.', shape: 'tall' },
+      { image: 'ks-press-yard', alt: 'The finished statue of two figures reading a newspaper, in the stone yard', caption: 'Finished, before it left the yard.', shape: 'tall' },
+      { image: 'ks-press-night', alt: 'The statue at night on its stepped plinth, lit from lights set into the base', caption: 'In place, lit from below.', shape: 'tall' },
+      { image: 'ks-press-night-close', alt: 'The two stone figures at night, lamp light falling on their faces', caption: 'After dark, the stone takes the light.', shape: 'wide' },
     ],
     featured: false,
   },

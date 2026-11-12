@@ -5,7 +5,7 @@ import SectionHeading from '../SectionHeading'
 import Img from '../Img'
 import { categories } from '../../data/categories'
 import { products } from '../../data/products'
-import { img } from '../../data/images'
+import { img, srcSetFor } from '../../data/images'
 import { ease } from '../../lib/motion'
 
 /**
@@ -66,6 +66,8 @@ export default function CreationsIndex() {
                   <motion.img
                     key={current.slug}
                     src={img(current.image)}
+                    srcSet={srcSetFor(img(current.image))}
+                    sizes="34vw"
                     alt={current.alt}
                     className="absolute inset-0 h-full w-full object-cover"
                     initial={{ clipPath: 'inset(100% 0% 0% 0%)', scale: 1.1, zIndex: 1 }}

@@ -7,10 +7,11 @@ import ImageReveal from '../components/ImageReveal'
 import ProjectCard from '../components/ProjectCard'
 import CustomCTA from '../components/CustomCTA'
 import Img from '../components/Img'
+import Press from '../components/Press'
 import NotFound from './NotFound'
 import usePageMeta from '../hooks/usePageMeta'
 import { projectBySlug, projects } from '../data/projects'
-import { img } from '../data/images'
+import { img, srcSetFor } from '../data/images'
 import { categoryBySlug } from '../data/categories'
 import { ease, fadeUp, viewport } from '../lib/motion'
 
@@ -61,7 +62,7 @@ export default function ProjectDetails() {
           animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
           transition={{ duration: 1.5, ease }}
         >
-          <img src={img(project.hero)} alt={project.title} fetchPriority="high" className="h-full w-full object-cover" />
+          <img src={img(project.hero)} srcSet={srcSetFor(img(project.hero))} sizes="100vw" alt={project.title} fetchPriority="high" className={`h-full w-full object-cover ${project.heroFocus || ''}`} />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-graphite/75 via-graphite/15 to-transparent" aria-hidden="true" />
         <div className="shell relative flex h-full flex-col justify-end pb-12 text-limestone md:pb-16">
@@ -111,6 +112,9 @@ export default function ProjectDetails() {
         </div>
       </section>
 
+      {/* Press coverage, for projects that had it */}
+      {project.press && <Press className="border-t border-graphite/10" />}
+
       {/* Concept and materials, when the project has them */}
       {(project.concept || project.materials?.length > 0) && (
       <section className="on-dark bg-basalt py-24 text-limestone md:py-36">
@@ -151,7 +155,7 @@ export default function ProjectDetails() {
 
       {/* Next project */}
       <Link to={`/projects/${next.slug}`} className="group relative block h-[70svh] min-h-[26rem] overflow-hidden bg-basalt" aria-label={`Next project: ${next.title}`}>
-        <Img src={img(next.hero)} alt="" className="absolute inset-0 h-full w-full object-cover opacity-80 transition-[transform,opacity] duration-[1.4s] ease-[var(--ease-sculpt)] group-hover:scale-[1.04] group-hover:opacity-100" />
+        <Img src={img(next.hero)} alt="" className={`absolute inset-0 h-full w-full object-cover ${next.heroFocus || ''} opacity-80 transition-[transform,opacity] duration-[1.4s] ease-[var(--ease-sculpt)] group-hover:scale-[1.04] group-hover:opacity-100`} />
         <div className="absolute inset-0 bg-graphite/45 transition-colors duration-700 group-hover:bg-graphite/30" aria-hidden="true" />
         <div className="shell relative flex h-full flex-col justify-center text-limestone">
           <p className="t-label text-limestone/80">Next project</p>

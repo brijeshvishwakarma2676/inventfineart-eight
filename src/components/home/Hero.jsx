@@ -4,7 +4,7 @@ import { animate, motion, useMotionValue, useReducedMotion, useScroll, useTransf
 import Button from '../Button'
 import RevealText from '../RevealText'
 import useMediaQuery from '../../hooks/useMediaQuery'
-import { img } from '../../data/images'
+import { img, srcSetFor } from '../../data/images'
 import { ease } from '../../lib/motion'
 import { useLoaderDone } from '../../lib/loader'
 
@@ -76,6 +76,8 @@ export default function Hero() {
           <motion.div className="absolute inset-0 bg-plaster" style={{ clipPath }}>
             <motion.img
               src={img('ifa-lobby-installation')}
+              srcSet={srcSetFor(img('ifa-lobby-installation'))}
+              sizes="125vw"
               alt="Three illuminated sculptural cones in a lobby, by Invent Fine Art"
               fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover"
